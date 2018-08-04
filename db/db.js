@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const sampleData = require('./sampleCommentData');
 
-mongoose.connect('mongodb://localhost/commentsList');
+mongoose.connect('mongodb://database/commentsList');
 
 const db = mongoose.connection;
 db.on('error', () => console.log('error connecting to mongo'));
@@ -28,21 +28,21 @@ const commentsSchema = new mongoose.Schema({
 
 const Comment = mongoose.model('comment', commentsSchema);
 
-// // Remove collection of database if it already exists
-// Comment.remove({}, () => {
-//   console.log('removed collection');
-// });
+// Remove collection of database if it already exists
+Comment.remove({}, () => {
+  console.log('removed collection');
+});
 
-// // Populates collection in database
-// for (let i = 0; i < sampleData.length; i += 1) {
-//   const saveComment = new Comment(sampleData[i]);
-//   saveComment.save((error, sampleData) => {
-//     if (error) {
-//       return console.log('error saving');
-//     }
-//     return console.log('saved', sampleData);
-//   });
-// }
+// Populates collection in database
+for (let i = 0; i < sampleData.length; i += 1) {
+  const saveComment = new Comment(sampleData[i]);
+  saveComment.save((error, sampleData) => {
+    if (error) {
+      return console.log('error saving');
+    }
+    return console.log('saved', sampleData);
+  });
+}
 
 // Gets all comments for a song on song page
 const getComments = (err, retrievedComments) => {

@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+  FEC:
+    image: commentslist
+    depends_on:
+      - 'database'
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 1458:1458
+  database:
+    image: mongo:latest

@@ -20,7 +20,7 @@
 #comments {
   min-height: auto;
   width: 750px; 
-  border: 10px solid green;
+  border-right: 10px solid green;
   font-family: 'Roboto', sans-serif;
 }
 
