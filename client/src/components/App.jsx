@@ -11,16 +11,20 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getComments();
+    const currentSongId = global.window.location.pathname.substring(7);
+    this.getComments(currentSongId);
   }
 
-  getComments() {
-    $.get('http://localhost:1458/api/songs/songId/comments', (data) => {
+  getComments(songId) {
+    $.get(`http://ec2-54-215-208-128.us-west-1.compute.amazonaws.com/songs/${songId}`, null, (data) => {
+      let songComments;
+      if(!songComments) {
+        let random = Math.floor(Math.random() * data.length);
+        songComments = data.slice(random, data.length);
+      }
       this.setState({
-        comments: data,
+        comments: songComments,
       });
-      // log test
-      // console.log('this array should be printed in chrome dev console', this.state.comments)
     });
   }
 

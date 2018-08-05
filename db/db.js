@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const sampleData = require('./sampleCommentData');
 
-mongoose.connect('mongodb://database/commentsList');
+mongoose.connect('mongodb+srv://benihime1458:12345678!@commentslist-ceiuc.mongodb.net/test');
 
 const db = mongoose.connection;
 db.on('error', () => console.log('error connecting to mongo'));
@@ -17,7 +17,7 @@ const repliesSchema = new mongoose.Schema({
 });
 
 const commentsSchema = new mongoose.Schema({
-  id: { type: Number, unique: true },
+  _id: Number,
   username: String,
   userId: Number,
   songtime: Number,
@@ -55,10 +55,6 @@ const getComments = (err, retrievedComments) => {
       } else {
         // sort data to display newest comments
         comments.sort((a, b) => b.id - a.id);
-
-        // log test
-        console.log('returned from database: ', comments[0]);
-
         retrievedComments(null, comments);
       }
     });

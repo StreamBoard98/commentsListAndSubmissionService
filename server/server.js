@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // outputs all comments for a song
-app.get('/api/songs/songId/comments', (req, res) => {
+app.get('/songs/:songId', (req, res) => {
   mongoDB.getComments(null, (err, data) => {
     if (err) {
       console.log(err);
