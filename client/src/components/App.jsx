@@ -16,7 +16,7 @@ class App extends React.Component {
   }
 
   getComments(songId) {
-    $.get(`http://ec2-54-215-208-128.us-west-1.compute.amazonaws.com/songs/${songId}`, null, (data) => {
+    $.get(`http://ec2-54-215-208-128.us-west-1.compute.amazonaws.com:1458/songs/${songId}`, null, (data) => {
       let songComments;
       if(!songComments) {
         let random = Math.floor(Math.random() * data.length);

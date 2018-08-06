@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const sampleData = require('./sampleCommentData');
+const sampleData = require('./sampleCommentData.js');
 
 mongoose.connect('mongodb+srv://benihime1458:12345678!@commentslist-ceiuc.mongodb.net/test');
 
@@ -17,7 +17,7 @@ const repliesSchema = new mongoose.Schema({
 });
 
 const commentsSchema = new mongoose.Schema({
-  _id: Number,
+  id: { type: Number, unique: true },
   username: String,
   userId: Number,
   songtime: Number,
@@ -38,7 +38,7 @@ for (let i = 0; i < sampleData.length; i += 1) {
   const saveComment = new Comment(sampleData[i]);
   saveComment.save((error, sampleData) => {
     if (error) {
-      return console.log('error saving');
+      return console.log('error saving', error);
     }
     return console.log('saved', sampleData);
   });
